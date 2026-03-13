@@ -1,4 +1,4 @@
-inputs,outputs
+image_path,label_path
 data/images/1ba2f7fe94c61554a0f377094152b362.jpg,data/labels/1ba2f7fe94c61554a0f377094152b362.txt
 data/images/20260203_175045.jpg,data/labels/20260203_175045.txt
 data/images/20260203_175118.jpg,data/labels/20260203_175118.txt
