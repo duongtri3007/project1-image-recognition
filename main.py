@@ -3,6 +3,11 @@ import pandas as pd
 import os
 from dataset import ObjDetectionDataset
 from torch.utils.data import DataLoader
+from model import build_model
+
+def collate(batch):
+    images, targets = zip(*batch)
+    return list(images), list(targets)
 
 def main():
     args = get_args()
@@ -16,7 +21,15 @@ def main():
     val_dataset = ObjDetectionDataset(val_df)
 
     # 3. Create data loaders
-    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, collate_fn=collate)
+    val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False, collate_fn=collate)
+
+    # images, targets = next(iter(train_loader))
+
+    #4 Initializing the model
+    model = build_model(args.backbone)
+
+    print()
 
 if __name__ == "__main__":
     main()
