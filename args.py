@@ -3,6 +3,8 @@ import argparse
 def get_args():
     parser = argparse.ArgumentParser(description="Model training options")
 
+    parser.add_argument('--backbone', type=str, default='fasterrcnn_resnet50_fpn', choices=['fasterrcnn_resnet50_fpn', 'fasterrcnn_mobilenet_v3'])
+
     parser.add_argument('--csv_dir', type=str, default='./data/CSVs')
 
     parser.add_argument('--out_dir', type=str, default='./sessions')
