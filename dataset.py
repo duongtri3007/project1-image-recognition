@@ -1,6 +1,7 @@
 import torch
 from PIL import Image
 from torchvision.transforms.functional import to_tensor
+import args
 
 
 class ObjDetectionDataset(torch.utils.data.Dataset):
@@ -17,6 +18,9 @@ class ObjDetectionDataset(torch.utils.data.Dataset):
 
         img = Image.open(row["image_path"]).convert("RGB")
         w, h = img.size
+        
+        img = img.resize((args.image_size, args.image_size))
+
         image = to_tensor(img)
 
         boxes, labels = [], []
