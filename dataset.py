@@ -3,6 +3,7 @@ from PIL import Image
 from torchvision.transforms.functional import to_tensor
 import args
 from utils import resize_box_xyxy
+from args import get_args
 
 class ObjDetectionDataset(torch.utils.data.Dataset):
     def __init__(self, df):
@@ -12,6 +13,8 @@ class ObjDetectionDataset(torch.utils.data.Dataset):
         return len(self.df)
 
     def __getitem__(self, idx):
+        args = get_args()
+
         # TODO 1: Get the row number idx from dataframe
         # your code here
         row = self.df.iloc[idx]
