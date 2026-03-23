@@ -24,9 +24,9 @@ def main():
 
     # 3. Create data loaders
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, collate_fn=collate,
-                              num_workers=0, pin_memory=torch.cuda.is_available)
+                              num_workers=0, pin_memory=torch.cuda.is_available())
     val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False, collate_fn=collate,
-                            num_workers=0, pin_memory=torch.cuda.is_available)
+                            num_workers=0, pin_memory=torch.cuda.is_available())
 
     # images, targets = next(iter(train_loader))
 
