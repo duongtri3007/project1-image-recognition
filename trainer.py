@@ -38,6 +38,9 @@ def train_model(model, train_loader, val_loader, device):
 
     best_val_loss = float('inf')
 
+    train_losses = []
+    val_losses = []
+
     for epoch in range(args.epochs):
 
         model.train()
@@ -69,6 +72,9 @@ def train_model(model, train_loader, val_loader, device):
         train_epoch_loss = running_loss / len(train_loader.dataset)
         val_loss = validate_model(model, val_loader, device)
 
+        train_losses.append(train_epoch_loss)
+        val_losses.append(val_loss)
+
         print(f"Epoch {epoch + 1} / {args.epochs} | "
             f"Train loss: {train_epoch_loss:.4f} | "
             f"Val loss: {val_loss:.4f}")    
@@ -78,3 +84,20 @@ def train_model(model, train_loader, val_loader, device):
 
             os.makedirs(args.out_dir, exist_ok=True)
             torch.save(model.state_dict(), os.path.join(args.out_dir, 'best_model.pth'))
+
+    import matplotlib.pyplot as plt
+    epochs = range(1, len(train_losses) + 1)
+
+    plt.figure(figsize=(8, 6))
+    plt.plot(epochs, train_losses, label="Training Loss")
+    plt.plot(epochs, val_losses, label="Validation Loss")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.title("Learning Curve")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+    plt.savefig(os.path.join(args.out_dir, "learning_curve.png"))
+
+    plt.show()
