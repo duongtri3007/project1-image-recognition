@@ -55,5 +55,5 @@ def show_batch(images, targets):
         ax.set_title(f"Sample {i + 1} in batch")
         ax.axis("off")
         plt.show(block=False)
-        plt.pause(1)
+        plt.pause(0.4)
         plt.close(fig)
