@@ -2,7 +2,6 @@ from args import get_args
 import os
 import torch
 import torch.optim as optim
-from utils import show_batch
 
 def validate_model(model, val_loader, device):
 
@@ -59,8 +58,6 @@ def train_model(model, train_loader, val_loader, device):
                 
                 for target in targets
             ]
-            
-            show_batch(images, targets)
 
             optimizer.zero_grad()
 
@@ -99,8 +96,7 @@ def train_model(model, train_loader, val_loader, device):
     plt.title("Learning Curve")
     plt.legend()
     plt.grid(True)
-    plt.show()
-
-    plt.savefig(os.path.join(args.out_dir, "learning_curve.png"))
-
-    plt.show()
+    save_path = os.path.join(args.out_dir, 'learning_curve.png')
+    plt.savefig(save_path)
+    print(f"Learning curve saved to {save_path}")
+    plt.close()
