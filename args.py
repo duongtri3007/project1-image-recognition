@@ -13,12 +13,12 @@ def get_args():
 
     parser.add_argument('--out_dir', type=str, default='./sessions')
 
-    parser.add_argument('--batch_size', type=int, default=8,
+    parser.add_argument('--batch_size', type=int, default=16,
                         choices=[8, 16, 32, 64])
     
     parser.add_argument('--epochs', type=int, default=100)
 
-    parser.add_argument('--lr', type=float, default=0.001)
+    parser.add_argument('--lr', type=float, default=0.0001)
 
     parser.add_argument('--wd', type=float, default=1e-4)
 
