@@ -4,10 +4,17 @@ from torchvision.transforms.functional import to_tensor
 import args
 from utils import resize_box_xyxy
 from args import get_args
+import augmentations as aug
 
 class ObjDetectionDataset(torch.utils.data.Dataset):
-    def __init__(self, df):
+    def __init__(self, df, transforms=None):
         self.df = df.reset_index(drop=True)
+
+        if transforms is None:
+            self.transforms = aug.NoTransform()
+
+        else:
+            self.transforms = transforms
 
     def __len__(self):
         return len(self.df)
